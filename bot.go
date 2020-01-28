@@ -55,29 +55,29 @@ func initBot(path string) (*Bot, error) {
 func (b *Bot) sendBot(data string) error {
 	log.Println("send bot message..", data)
 	if b.zulip != nil {
-		log.Println("send bot zulip message..", b.zulip)
-		/*
-			if err := b.zulip.send(&ZulipPayload{
-				Type:    "stream",
-				To:      "[프로젝트D]+서버팀",
-				Subject: "unreal news",
-				Content: data,
-			}); err != nil {
-				log.Println(err)
-				return err[0]
-			}
-		*/
+		// log.Println("send bot zulip message..", b.zulip)
+
+		if err := b.zulip.send(&ZulipPayload{
+			Type:    "stream",
+			To:      "[프로젝트D]+서버팀",
+			Subject: "unreal news",
+			Content: data,
+		}); err != nil {
+			log.Println(err)
+			return err[0]
+		}
+
 	}
 	if b.slack != nil {
-		log.Println("send bot slack message..", b.slack)
-		/*
-			if err := b.slack.send(&SlackPayload{
-				Text: data,
-			}); err != nil {
-				log.Println(err)
-				return err[0]
-			}
-		*/
+		// log.Println("send bot slack message..", b.slack)
+
+		if err := b.slack.send(&SlackPayload{
+			Text: data,
+		}); err != nil {
+			log.Println(err)
+			return err[0]
+		}
+
 	}
 	return nil
 }
